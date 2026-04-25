@@ -33,12 +33,16 @@ class WechatPay extends Payment{
 public class PaymentSystem{
 
         public static void progressPayment(Payment p ,double money){
+            if(p == null){
+                System.out.println("无效");
+                return;
+            }
             p.pay(money);
-            if( p instanceof Alipay){
-                Alipay ap = (Alipay)p;
+            if( p instanceof Alipay ap){
+
                 ap.scanFace();
-            } else if (p instanceof WechatPay) {
-                WechatPay wp = (WechatPay)p;
+            } else if (p instanceof WechatPay wp) {
+
                 wp.redPacket();
 
             }
