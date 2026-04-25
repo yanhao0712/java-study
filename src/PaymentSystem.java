@@ -1,0 +1,57 @@
+
+
+
+
+
+class Payment{
+    void pay(double amount){
+        System.out.println("正在发起通用支付"+amount);
+    }
+}
+
+
+class Alipay extends Payment{
+    @Override
+    void pay(double amount){
+        System.out.println("这是支付宝" + amount);
+    }
+    void scanFace(){
+        System.out.println("可以扫脸支付");
+    }
+}
+
+class WechatPay extends Payment{
+    @Override
+    void pay(double amount){
+        System.out.println("这是微信支付" + amount);
+    }
+    void redPacket(){
+        System.out.println("你可以发红包");
+    }
+}
+
+public class PaymentSystem{
+
+        public static void progressPayment(Payment p ,double money){
+            p.pay(money);
+            if( p instanceof Alipay){
+                Alipay ap = (Alipay)p;
+                ap.scanFace();
+            } else if (p instanceof WechatPay) {
+                WechatPay wp = (WechatPay)p;
+                wp.redPacket();
+
+            }
+
+
+        }
+
+    public static void main(String[] args){
+        Payment p = new Alipay();
+        Payment p2 = new WechatPay();
+        progressPayment(p,100.0);
+        progressPayment(p2,200.0);
+    }
+}
+
+
